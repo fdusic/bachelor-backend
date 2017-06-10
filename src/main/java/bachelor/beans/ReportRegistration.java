@@ -43,6 +43,9 @@ public class ReportRegistration implements Serializable{
 	@Column(nullable = false, length = 30)
 	private String phone;
 	
+	@Column(nullable = false, length = 40)
+	private String password;
+	
 	@Column(nullable = false)
 	private User.Proffesion proffesion;
 	
@@ -66,6 +69,14 @@ public class ReportRegistration implements Serializable{
 
 	public void setManager(User manager) {
 		this.manager = manager;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public User getAdmin() {

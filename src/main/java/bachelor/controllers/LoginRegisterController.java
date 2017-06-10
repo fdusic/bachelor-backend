@@ -1,5 +1,7 @@
 package bachelor.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +15,7 @@ import bachelor.services.LoginRegisterService;
 
 @RestController
 @RequestMapping("/loginRegister")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class LoginRegisterController {
 	
 	@Autowired
@@ -26,7 +28,13 @@ public class LoginRegisterController {
 	
 	@RequestMapping(value = "/createRegistrationReport", method = RequestMethod.POST)
 	public void createRegistrationRequest(@RequestBody ReportRegistration report){
+		System.out.println(report);
 		this.loginRegisterService.createRegistrationReport(report);
+	}
+	
+	@RequestMapping(value = "/getRegistrationReports", method = RequestMethod.GET)
+	public List<ReportRegistration> getRegistrationReports(){
+		return this.loginRegisterService.getReportRegistrations();
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)

@@ -36,6 +36,10 @@ public class LoginRegisterServiceImp implements LoginRegisterService{
 		this.registrationReportRepo.save(rr);
 	}
 
+	public List<ReportRegistration> getReportRegistrations() {
+		return this.registrationReportRepo.findByExecuted(false);
+	}
+
 	public void register(ReportRegistration rr) {
 		rr.setExecuted(true);
 		this.registrationReportRepo.save(rr);
@@ -48,8 +52,10 @@ public class LoginRegisterServiceImp implements LoginRegisterService{
 		user.setProffesion(rr.getProffesion());
 		user.setSurname(rr.getSurname());
 		user.setUsername(rr.getUsername());
+		user.setPassword(rr.getPassword());
 
 		this.userRepo.save(user);
 	}
+
 
 }
