@@ -1,5 +1,7 @@
 package bachelor.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import bachelor.beans.Facility;
@@ -46,5 +48,15 @@ public class FSMServiceImp implements FSMService {
 
 	public Iterable<Section> getSections() {
 		return this.sectionRepo.findAll();
+	}
+
+	public Facility getFacilityById(int idF) {
+		List<Facility> facilities = this.facilityRepo.findFacilityByIdF(idF);
+		return facilities.get(0);
+	}
+
+	public Section getSectionById(int idS) {
+		List<Section> sections = this.sectionRepo.findSectionByIdS(idS);
+		return sections.get(0);
 	}
 }

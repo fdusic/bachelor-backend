@@ -1,13 +1,21 @@
 package bachelor.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @SuppressWarnings("serial")
@@ -26,8 +34,10 @@ public class Facility implements Serializable{
 	@Column(nullable = false)
 	private Double surface;
 	
-	@OneToMany(mappedBy = "facility")
-	private List<Section> sections;
+	
+	@OneToMany(mappedBy = "facility",cascade = CascadeType.ALL)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@FacilitySection")
+	private List<Section> sections = new ArrayList<Section>();
 	
 	public Facility() {
 	}

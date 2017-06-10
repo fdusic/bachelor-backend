@@ -15,4 +15,7 @@ public interface FSMService {
 	public void updateSection(Section s);
 	public Iterable<Section> getSections();
 	
+	public Facility getFacilityById(int idF);
+	public Section getSectionById(int idS);
+	
 }
