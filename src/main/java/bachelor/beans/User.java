@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
-
 @Entity
 @SuppressWarnings("serial")
 @Table(name = "users")
@@ -24,7 +22,7 @@ public class User implements Serializable {
 	@Column(unique = true, nullable = false, length = 30)
 	private String username;
 	
-	@Column(unique = true, nullable = false, length = 30)
+	@Column(nullable = false, length = 30)
 	private String password;
 	
 	@Column(nullable = false, length = 30)

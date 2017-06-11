@@ -26,8 +26,12 @@ public class ReportFailure implements Serializable{
 	private Machine machine;
 	
 	@ManyToOne
-	@JoinColumn(name = "idK", nullable = false)
-	private User user;
+	@JoinColumn(name = "idE", nullable = false)
+	private User employee;
+	
+	@ManyToOne
+	@JoinColumn(name = "idR", nullable = false)
+	private User repairer;
 	
 	@Column
 	private boolean executed = false;
@@ -59,12 +63,20 @@ public class ReportFailure implements Serializable{
 		this.machine = machine;
 	}
 
-	public User getUser() {
-		return user;
+	public User getEmployee() {
+		return employee;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setEmployee(User employee) {
+		this.employee = employee;
+	}
+
+	public User getRepairer() {
+		return repairer;
+	}
+
+	public void setRepairer(User repairer) {
+		this.repairer = repairer;
 	}
 
 	public boolean isExecuted() {
