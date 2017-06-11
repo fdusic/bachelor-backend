@@ -6,7 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
 
 @Entity
 @SuppressWarnings("serial")
@@ -37,6 +41,11 @@ public class User implements Serializable {
 	
 	@Column(nullable = false, length = 30)
 	private String phone;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="facility", nullable = true)
+	private Facility facility;
 	
 	public enum Proffesion{
 		USER, EMPLOYEE, MANAGER, EXPERT, ADMIN, REPAIRER

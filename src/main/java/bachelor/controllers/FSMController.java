@@ -1,14 +1,27 @@
 package bachelor.controllers;
 
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.ws.rs.core.MediaType;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import bachelor.beans.Facility;
+import bachelor.beans.Machine;
 import bachelor.beans.Section;
 import bachelor.services.FSMService;
 
@@ -72,6 +85,29 @@ public class FSMController {
 	public Section getSectionById(@RequestBody int idS){
 		return this.fsmService.getSectionById(idS);
 	}
+	
+	
+	@RequestMapping(value = "/createMachine", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA)
+	public void createMachine(@RequestParam("image") MultipartFile file, @RequestParam("name") String name, @RequestParam("section") String idS, @RequestParam("description") String description) throws IOException{
+		
+		Machine machine = new Machine();
+		Section section = this.fsmService.getSectionById(Integer.parseInt(idS));
+		machine.setSection(section);
+		machine.setName(name);
+		machine.setDescription(description);
+		machine.setImage(file.getOriginalFilename());
+		
+		machine = this.fsmService.createMachine(machine);
+		
+		System.out.println(section.getMachines().size());
+		
+		String saveImageName = machine.getIdM() + file.getOriginalFilename();
+		String imagePath = new java.io.File(".").getCanonicalPath()+File.separator+".."+File.separator+"bachelor-frontend/src/images/" + saveImageName;
+		
+		
+		file.transferTo(new File(imagePath));
+	}
+	
 	
 	
 	

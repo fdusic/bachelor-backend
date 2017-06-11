@@ -1,6 +1,7 @@
 package bachelor.services;
 
 import bachelor.beans.Facility;
+import bachelor.beans.Machine;
 import bachelor.beans.Section;
 
 public interface FSMService {
@@ -17,5 +18,8 @@ public interface FSMService {
 	
 	public Facility getFacilityById(int idF);
 	public Section getSectionById(int idS);
+	
+	
+	public Machine createMachine(Machine m);
 	
 }

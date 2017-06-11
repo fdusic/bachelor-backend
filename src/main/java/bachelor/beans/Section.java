@@ -1,8 +1,10 @@
 package bachelor.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -11,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @SuppressWarnings("serial")
@@ -34,8 +39,9 @@ public class Section implements Serializable{
 	@JoinColumn(name = "facility", nullable = false, referencedColumnName = "idF",foreignKey = @ForeignKey(name="fk_section_facility"))
 	private Facility facility;
 	
-	@OneToMany(mappedBy = "section")
-	private List<Machine> machines;
+	@OneToMany(mappedBy = "section",cascade = CascadeType.ALL)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@SectionMachine")
+	private List<Machine> machines = new ArrayList<Machine>();
 	
 	public Section() {
 	}

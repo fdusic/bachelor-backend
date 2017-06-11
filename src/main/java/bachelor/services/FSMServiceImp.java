@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import bachelor.beans.Facility;
+import bachelor.beans.Machine;
 import bachelor.beans.Section;
 import bachelor.repositories.FacilityRepo;
+import bachelor.repositories.MachineRepo;
 import bachelor.repositories.SectionRepo;
 
 @org.springframework.stereotype.Service
@@ -17,6 +19,9 @@ public class FSMServiceImp implements FSMService {
 	
 	@Autowired
 	private SectionRepo sectionRepo;
+	
+	@Autowired
+	private MachineRepo machineRepo;
 	
 	public void createFacility(Facility f) {
 		this.facilityRepo.save(f);
@@ -57,6 +62,12 @@ public class FSMServiceImp implements FSMService {
 
 	public Section getSectionById(int idS) {
 		List<Section> sections = this.sectionRepo.findSectionByIdS(idS);
+		Section s = sections.get(0);
+		System.out.println(s.getMachines().get(0).getName());
 		return sections.get(0);
+	}
+
+	public Machine createMachine(Machine m) {
+		return this.machineRepo.save(m);
 	}
 }

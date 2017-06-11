@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -27,7 +28,7 @@ public class Machine implements Serializable {
 	private String description;
 	
 	@ManyToOne
-	@JoinColumn(name = "idS", nullable = false)
+	@JoinColumn(name = "section", nullable = false, referencedColumnName = "idS",foreignKey = @ForeignKey(name="fk_machine_section"))
 	private Section section;
 	
 	public Machine() {
