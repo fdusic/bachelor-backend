@@ -110,6 +110,16 @@ public class FSMController {
 		return this.fsmService.getMachinesBySection(section);
 	}
 	
+	@RequestMapping(value = "/getMachineById", method = RequestMethod.POST)
+	public Machine getMachineById(@RequestBody int id){
+		return this.fsmService.getMachineById(id);
+	}
+	
+	@RequestMapping(value = "/deleteMachine", method = RequestMethod.POST)
+	public void deleteMachine(@RequestBody int id){
+		this.fsmService.deleteMachine(id);
+	}
+	
 	@RequestMapping(value = "/createInterface", method = RequestMethod.POST)
 	public Interface createInterface(@RequestBody Interface iface){
 		return this.fsmService.createInterface(iface);

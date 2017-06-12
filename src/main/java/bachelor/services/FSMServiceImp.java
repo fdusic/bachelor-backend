@@ -89,4 +89,13 @@ public class FSMServiceImp implements FSMService {
 	public void machineSupportInterfaces(Machine machine) {
 		this.machineRepo.save(machine);
 	}
+
+	public void deleteMachine(int id) {
+		this.machineRepo.delete(id);
+	}
+
+	public Machine getMachineById(int idM) {
+		List<Machine> machines = this.machineRepo.findByIdM(idM);
+		return machines.get(0);
+	}
 }

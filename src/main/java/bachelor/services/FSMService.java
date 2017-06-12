@@ -28,5 +28,8 @@ public interface FSMService {
 	public Iterable<Interface> getInterfaces();
 	
 	public void machineSupportInterfaces(Machine machine);
+	public void deleteMachine(int id);
+	
+	public Machine getMachineById(int idM);
 	
 }
