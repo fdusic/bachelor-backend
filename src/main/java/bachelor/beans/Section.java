@@ -38,9 +38,6 @@ public class Section implements Serializable{
 	@JoinColumn(name = "facility", nullable = false, referencedColumnName = "idF",foreignKey = @ForeignKey(name="fk_section_facility"))
 	private Facility facility;
 	
-	@OneToMany(mappedBy = "section",cascade = CascadeType.ALL)
-	@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@SectionMachine")
-	private List<Machine> machines = new ArrayList<Machine>();
 	
 	public Section() {
 	}
@@ -85,11 +82,4 @@ public class Section implements Serializable{
 		this.facility = facility;
 	}
 
-	public List<Machine> getMachines() {
-		return machines;
-	}
-
-	public void setMachines(List<Machine> machines) {
-		this.machines = machines;
-	}
 }

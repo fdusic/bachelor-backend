@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import bachelor.beans.Facility;
+import bachelor.beans.Interface;
 import bachelor.beans.Machine;
 import bachelor.beans.Section;
 import bachelor.services.FSMService;
@@ -83,7 +84,8 @@ public class FSMController {
 	
 	
 	@RequestMapping(value = "/createMachine", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA)
-	public void createMachine(@RequestParam("image") MultipartFile file, @RequestParam("name") String name, @RequestParam("section") String idS, @RequestParam("description") String description) throws IOException{
+	public Machine createMachine(@RequestParam("image") MultipartFile file, @RequestParam("name") String name, @RequestParam("section") String idS, @RequestParam("description") String description) throws IOException{
+		
 		
 		Machine machine = new Machine();
 		Section section = this.fsmService.getSectionById(Integer.parseInt(idS));
@@ -94,14 +96,35 @@ public class FSMController {
 		
 		machine = this.fsmService.createMachine(machine);
 		
-		System.out.println(section.getMachines().size());
 		
 		String saveImageName = machine.getIdM() + file.getOriginalFilename();
 		String imagePath = new java.io.File(".").getCanonicalPath()+File.separator+".."+File.separator+"bachelor-frontend/src/images/" + saveImageName;
 		
 		
 		file.transferTo(new File(imagePath));
+		return machine;
 	}
+	
+	@RequestMapping(value = "/getMachinesBySection", method = RequestMethod.POST)
+	public Iterable<Machine> getMachinesBySection(@RequestBody Section section){
+		return this.fsmService.getMachinesBySection(section);
+	}
+	
+	@RequestMapping(value = "/createInterface", method = RequestMethod.POST)
+	public Interface createInterface(@RequestBody Interface iface){
+		return this.fsmService.createInterface(iface);
+	}
+	
+	@RequestMapping(value = "/getInterfaces", method = RequestMethod.GET)
+	public Iterable<Interface> getInterfaces(){
+		return this.fsmService.getInterfaces();
+	}
+	
+	@RequestMapping(value = "/machineSupportInterfaces", method = RequestMethod.POST)
+	public void machineSupportInterfaces(@RequestBody Machine machine){
+		 this.fsmService.machineSupportInterfaces(machine);
+	}
+	
 	
 	
 	

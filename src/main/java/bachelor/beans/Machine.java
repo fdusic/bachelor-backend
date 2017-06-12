@@ -1,6 +1,7 @@
 package bachelor.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -28,8 +31,15 @@ public class Machine implements Serializable {
 	private String description;
 	
 	@ManyToOne
-	@JoinColumn(name = "section", nullable = false, referencedColumnName = "idS",foreignKey = @ForeignKey(name="fk_machine_section"))
+	@JoinColumn(name = "section", nullable = false)
 	private Section section;
+	
+	@ManyToMany
+	@JoinTable(name="supportsInterface",joinColumns =
+            @JoinColumn(name = "machine", referencedColumnName = "idM"),
+        inverseJoinColumns =
+            @JoinColumn(name = "interface", referencedColumnName = "idI"))
+	private List<Interface> supportsInterface;
 	
 	public Machine() {
 	}
@@ -73,4 +83,13 @@ public class Machine implements Serializable {
 	public void setSection(Section section) {
 		this.section = section;
 	}
+
+	public List<Interface> getSupportsInterface() {
+		return supportsInterface;
+	}
+
+	public void setSupportsInterface(List<Interface> supportsInterface) {
+		this.supportsInterface = supportsInterface;
+	}
+	
 }

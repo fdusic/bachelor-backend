@@ -1,6 +1,7 @@
 package bachelor.services;
 
 import bachelor.beans.Facility;
+import bachelor.beans.Interface;
 import bachelor.beans.Machine;
 import bachelor.beans.Section;
 
@@ -21,5 +22,11 @@ public interface FSMService {
 	
 	
 	public Machine createMachine(Machine m);
+	public Iterable<Machine> getMachinesBySection(Section section);
+	
+	public Interface createInterface(Interface iface);
+	public Iterable<Interface> getInterfaces();
+	
+	public void machineSupportInterfaces(Machine machine);
 	
 }
