@@ -1,5 +1,6 @@
 package bachelor.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import bachelor.beans.Facility;
 import bachelor.beans.Interface;
 import bachelor.beans.Machine;
+import bachelor.beans.ReportFailure;
 import bachelor.beans.Section;
+import bachelor.beans.User;
 import bachelor.repositories.FacilityRepo;
+import bachelor.repositories.FailureReportRepo;
 import bachelor.repositories.InterfaceRepo;
 import bachelor.repositories.MachineRepo;
 import bachelor.repositories.SectionRepo;
@@ -27,6 +31,9 @@ public class FSMServiceImp implements FSMService {
 	
 	@Autowired
 	private InterfaceRepo interfaceRepo;
+	
+	@Autowired
+	private FailureReportRepo failureReportRepo;
 	
 	public void createFacility(Facility f) {
 		this.facilityRepo.save(f);
@@ -93,9 +100,38 @@ public class FSMServiceImp implements FSMService {
 	public void deleteMachine(int id) {
 		this.machineRepo.delete(id);
 	}
+	
+	public Machine getMachineById(int idm) {
+		List<Machine> list = this.machineRepo.findByIdM(idm);
+		if(list.size() == 0)
+			return null;
+		else
+			return list.get(0);
+	}
 
-	public Machine getMachineById(int idM) {
-		List<Machine> machines = this.machineRepo.findByIdM(idM);
-		return machines.get(0);
+	public void createFailureReport(ReportFailure rf) {
+		User user = new User();
+		user.setIdU(1);
+		
+		User user2 = new User();
+		user2.setIdU(2);
+		
+		rf.setExecuted(false);
+		rf.setDateCreated(new Date());
+		rf.setEmployee(user);
+		rf.setRepairer(user2);
+		
+		System.out.println(rf);
+		
+		this.failureReportRepo.save(rf);
+	}
+
+	public List<ReportFailure> getFailureReports() {
+		return this.failureReportRepo.findByExecuted(false);
+	}
+
+	public void fixed(ReportFailure rf) {
+		rf.setExecuted(true);
+		this.failureReportRepo.save(rf);
 	}
 }

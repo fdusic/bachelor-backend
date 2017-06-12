@@ -14,7 +14,6 @@ public interface MachineRepo extends CrudRepository<Machine, Integer>{
 	@Transactional
 	List<Machine> findByIdM(int idM);
 	
-	
 	@Transactional
 	List<Machine> findBySection(Section section);
 

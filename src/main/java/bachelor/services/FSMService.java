@@ -1,8 +1,11 @@
 package bachelor.services;
 
+import java.util.List;
+
 import bachelor.beans.Facility;
 import bachelor.beans.Interface;
 import bachelor.beans.Machine;
+import bachelor.beans.ReportFailure;
 import bachelor.beans.Section;
 
 public interface FSMService {
@@ -31,5 +34,9 @@ public interface FSMService {
 	public void deleteMachine(int id);
 	
 	public Machine getMachineById(int idM);
+	
+	public void createFailureReport(ReportFailure rf);
+	public List<ReportFailure> getFailureReports();
+	public void fixed(ReportFailure rf);
 	
 }

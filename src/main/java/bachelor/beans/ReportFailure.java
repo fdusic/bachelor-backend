@@ -36,6 +36,9 @@ public class ReportFailure implements Serializable{
 	@Column
 	private boolean executed = false;
 	
+	@Column(length = 100)
+	private String error;
+	
 	public ReportFailure() {
 	}
 
@@ -85,5 +88,21 @@ public class ReportFailure implements Serializable{
 
 	public void setExecuted(boolean executed) {
 		this.executed = executed;
+	}
+	
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
+	@Override
+	public String toString() {
+		return "ReportFailure [idRF=" + idRF + ", dateCreated=" + dateCreated
+				+ ", machine=" + machine + ", employee=" + employee
+				+ ", repairer=" + repairer + ", executed=" + executed
+				+ ", error=" + error + "]";
 	}
 }

@@ -3,6 +3,7 @@ package bachelor.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import bachelor.beans.Facility;
 import bachelor.beans.Interface;
 import bachelor.beans.Machine;
+import bachelor.beans.ReportFailure;
 import bachelor.beans.Section;
 import bachelor.services.FSMService;
 
@@ -85,8 +87,7 @@ public class FSMController {
 	
 	@RequestMapping(value = "/createMachine", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA)
 	public Machine createMachine(@RequestParam("image") MultipartFile file, @RequestParam("name") String name, @RequestParam("section") String idS, @RequestParam("description") String description) throws IOException{
-		
-		
+
 		Machine machine = new Machine();
 		Section section = this.fsmService.getSectionById(Integer.parseInt(idS));
 		machine.setSection(section);
@@ -110,11 +111,6 @@ public class FSMController {
 		return this.fsmService.getMachinesBySection(section);
 	}
 	
-	@RequestMapping(value = "/getMachineById", method = RequestMethod.POST)
-	public Machine getMachineById(@RequestBody int id){
-		return this.fsmService.getMachineById(id);
-	}
-	
 	@RequestMapping(value = "/deleteMachine", method = RequestMethod.POST)
 	public void deleteMachine(@RequestBody int id){
 		this.fsmService.deleteMachine(id);
@@ -135,8 +131,24 @@ public class FSMController {
 		 this.fsmService.machineSupportInterfaces(machine);
 	}
 	
+	@RequestMapping(value = "/getMachineById", method = RequestMethod.POST)
+	public Machine getMachineById(@RequestBody int idm){
+		return this.fsmService.getMachineById(idm);
+	}
 	
+	@RequestMapping(value = "/createFailureReport", method = RequestMethod.POST)
+	public void createFailureReport(@RequestBody ReportFailure rf){
+		this.fsmService.createFailureReport(rf);
+	}
 	
+	@RequestMapping(value = "/getFailureReports", method = RequestMethod.GET)
+	public List<ReportFailure> getFailureReports(){
+		return this.fsmService.getFailureReports();
+	}
 	
-	
+	@RequestMapping(value = "/fixed", method = RequestMethod.POST)
+	public void fixed(@RequestBody ReportFailure rf){
+		System.out.println(rf);
+		this.fsmService.fixed(rf);
+	}
 }
