@@ -2,11 +2,14 @@ package bachelor.services;
 
 import java.util.List;
 
+import bachelor.beans.ConnectionType;
 import bachelor.beans.Facility;
 import bachelor.beans.Interface;
 import bachelor.beans.Machine;
+import bachelor.beans.MachineInTopology;
 import bachelor.beans.ReportFailure;
 import bachelor.beans.Section;
+import bachelor.beans.Topology;
 
 public interface FSMService {
 
@@ -38,5 +41,12 @@ public interface FSMService {
 	public void createFailureReport(ReportFailure rf);
 	public List<ReportFailure> getFailureReports();
 	public void fixed(ReportFailure rf);
+	
+	public List<Section> getSectionByFacility(Facility facility);
+	public ConnectionType createConnectionType(ConnectionType ct);
+	public Iterable<ConnectionType> getConnectionTypes();
+	public Topology createTopology(Topology t);
+	
+	public List<MachineInTopology> createMachinesInTopology(List<MachineInTopology> mts);
 	
 }
