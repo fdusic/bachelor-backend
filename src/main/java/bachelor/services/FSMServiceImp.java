@@ -1,21 +1,29 @@
 package bachelor.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import bachelor.beans.ConnectionType;
 import bachelor.beans.Facility;
 import bachelor.beans.Interface;
 import bachelor.beans.Machine;
+import bachelor.beans.MachineInTopology;
 import bachelor.beans.ReportFailure;
 import bachelor.beans.Section;
+import bachelor.beans.Topology;
 import bachelor.beans.User;
+import bachelor.repositories.ConnectionTypeRepo;
 import bachelor.repositories.FacilityRepo;
 import bachelor.repositories.FailureReportRepo;
 import bachelor.repositories.InterfaceRepo;
+import bachelor.repositories.MachineInTopologyRepo;
 import bachelor.repositories.MachineRepo;
 import bachelor.repositories.SectionRepo;
+import bachelor.repositories.TopologyRepo;
+import bachelor.repositories.UserRepo;
 
 @org.springframework.stereotype.Service
 public class FSMServiceImp implements FSMService {
@@ -34,6 +42,18 @@ public class FSMServiceImp implements FSMService {
 	
 	@Autowired
 	private FailureReportRepo failureReportRepo;
+	
+	@Autowired
+	private ConnectionTypeRepo connectionTypeRepo;
+	
+	@Autowired
+	private TopologyRepo topologyRepo;
+	
+	@Autowired
+	private UserRepo userRepo;
+	
+	@Autowired
+	private MachineInTopologyRepo machineInTopologyRepo;
 	
 	public void createFacility(Facility f) {
 		this.facilityRepo.save(f);
@@ -133,5 +153,36 @@ public class FSMServiceImp implements FSMService {
 	public void fixed(ReportFailure rf) {
 		rf.setExecuted(true);
 		this.failureReportRepo.save(rf);
+	}
+
+	public List<Section> getSectionByFacility(Facility facility) {
+		return this.sectionRepo.findByFacility(facility);
+	}
+
+	public ConnectionType createConnectionType(ConnectionType ct) {
+		return this.connectionTypeRepo.save(ct);
+	}
+
+	public Iterable<ConnectionType> getConnectionTypes() {
+		return this.connectionTypeRepo.findAll();
+	}
+
+	public Topology createTopology(Topology t) {
+		List<User> users = this.userRepo.findByUsername("babs");
+		User user = users.get(0);
+		t.setAuthor(user);
+		return this.topologyRepo.save(t);
+	}
+
+	public List<MachineInTopology> createMachinesInTopology(List<MachineInTopology> mts) {
+		
+		List<MachineInTopology> temp = new ArrayList<MachineInTopology>();
+		
+		for(MachineInTopology mt: mts){
+			MachineInTopology m = this.machineInTopologyRepo.save(mt); 
+			temp.add(m);
+		}
+		
+		return temp;
 	}
 }

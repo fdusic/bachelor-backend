@@ -20,8 +20,10 @@ import bachelor.beans.ConnectionType;
 import bachelor.beans.Facility;
 import bachelor.beans.Interface;
 import bachelor.beans.Machine;
+import bachelor.beans.MachineInTopology;
 import bachelor.beans.ReportFailure;
 import bachelor.beans.Section;
+import bachelor.beans.Topology;
 import bachelor.services.FSMService;
 
 // POM - postrojenje, odeljenje, masine
@@ -150,5 +152,25 @@ public class FSMController {
 	public void fixed(@RequestBody ReportFailure rf){
 		System.out.println(rf);
 		this.fsmService.fixed(rf);
+	}
+	
+	@RequestMapping(value = "/createConnectionType", method = RequestMethod.POST)
+	public ConnectionType createConnectionType(@RequestBody ConnectionType ct){
+		return this.fsmService.createConnectionType(ct);
+	}
+	
+	@RequestMapping(value = "/getConnectionTypes", method = RequestMethod.GET)
+	public Iterable<ConnectionType> getConnectionTypes(){
+		return this.fsmService.getConnectionTypes();
+	}
+	
+	@RequestMapping(value = "/createTopology", method = RequestMethod.POST)
+	public Topology createTopology(@RequestBody Topology t){
+		return this.fsmService.createTopology(t);
+	}
+	
+	@RequestMapping(value = "/createMachinesInTopology", method = RequestMethod.POST)
+	public List<MachineInTopology> createMachinesInTopology(@RequestBody List<MachineInTopology> mts){
+		return this.fsmService.createMachinesInTopology(mts);
 	}
 }

@@ -31,11 +31,6 @@ public class Facility implements Serializable{
 	@Column(nullable = false)
 	private Double surface;
 	
-	
-	@OneToMany(mappedBy = "facility",cascade = CascadeType.ALL)
-	@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@FacilitySection")
-	private List<Section> sections = new ArrayList<Section>();
-	
 	public Facility() {
 	}
 
@@ -69,13 +64,5 @@ public class Facility implements Serializable{
 
 	public void setSurface(Double surface) {
 		this.surface = surface;
-	}
-
-	public List<Section> getSections() {
-		return sections;
-	}
-
-	public void setSections(List<Section> sections) {
-		this.sections = sections;
 	}
 }

@@ -28,7 +28,7 @@ public class Section implements Serializable{
 	private Double surface;
 	
 	@ManyToOne
-	@JoinColumn(name = "facility", nullable = false, referencedColumnName = "idF",foreignKey = @ForeignKey(name="fk_section_facility"))
+	@JoinColumn(name = "facility", nullable = false)
 	private Facility facility;
 	
 	
