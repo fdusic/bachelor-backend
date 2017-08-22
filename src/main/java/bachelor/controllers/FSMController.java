@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import bachelor.beans.ConnectionType;
 import bachelor.beans.Facility;
 import bachelor.beans.Interface;
 import bachelor.beans.Machine;
@@ -83,7 +84,6 @@ public class FSMController {
 	public Section getSectionById(@RequestBody int idS){
 		return this.fsmService.getSectionById(idS);
 	}
-	
 	
 	@RequestMapping(value = "/createMachine", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA)
 	public Machine createMachine(@RequestParam("image") MultipartFile file, @RequestParam("name") String name, @RequestParam("section") String idS, @RequestParam("description") String description) throws IOException{
