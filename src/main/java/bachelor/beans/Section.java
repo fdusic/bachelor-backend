@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -30,7 +29,6 @@ public class Section implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "facility", nullable = false)
 	private Facility facility;
-	
 	
 	public Section() {
 	}

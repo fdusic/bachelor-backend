@@ -87,6 +87,11 @@ public class FSMController {
 		return this.fsmService.getSectionById(idS);
 	}
 	
+	@RequestMapping(value = "/getSectionByFacility", method = RequestMethod.POST)
+	public List<Section> getSectionByFacility(@RequestBody Facility facility){
+		return this.fsmService.getSectionByFacility(facility);
+	}
+	
 	@RequestMapping(value = "/createMachine", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA)
 	public Machine createMachine(@RequestParam("image") MultipartFile file, @RequestParam("name") String name, @RequestParam("section") String idS, @RequestParam("description") String description) throws IOException{
 
