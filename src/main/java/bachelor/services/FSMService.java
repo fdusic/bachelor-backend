@@ -10,6 +10,7 @@ import bachelor.beans.MachineInTopology;
 import bachelor.beans.ReportFailure;
 import bachelor.beans.Section;
 import bachelor.beans.Topology;
+import bachelor.beans.User;
 
 public interface FSMService {
 
@@ -38,9 +39,9 @@ public interface FSMService {
 	
 	public Machine getMachineById(int idM);
 	
-	public void createFailureReport(ReportFailure rf);
+	public void createFailureReport(ReportFailure rf, User user);
 	public List<ReportFailure> getFailureReports();
-	public void fixed(ReportFailure rf);
+	public void fixed(ReportFailure rf, User user);
 	
 	public List<Section> getSectionByFacility(Facility facility);
 	public ConnectionType createConnectionType(ConnectionType ct);

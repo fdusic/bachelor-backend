@@ -30,7 +30,7 @@ public class ReportFailure implements Serializable{
 	private User employee;
 	
 	@ManyToOne
-	@JoinColumn(name = "idR", nullable = false)
+	@JoinColumn(name = "idR", nullable = true)
 	private User repairer;
 	
 	@Column

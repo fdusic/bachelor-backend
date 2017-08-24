@@ -20,7 +20,6 @@ public class Step implements Serializable{
 	@GeneratedValue
 	private int idStep;
 	
-	
 	@Column(length = 100, nullable = false)
 	private String description;
 	

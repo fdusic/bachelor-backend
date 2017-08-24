@@ -32,7 +32,8 @@ public class LoginRegisterServiceImp implements LoginRegisterService{
 		return list.get(0);
 	}
 
-	public void createRegistrationReport(ReportRegistration rr) {
+	public void createRegistrationReport(ReportRegistration rr, User user) {
+		rr.setManager(user);
 		this.registrationReportRepo.save(rr);
 	}
 
@@ -40,8 +41,9 @@ public class LoginRegisterServiceImp implements LoginRegisterService{
 		return this.registrationReportRepo.findByExecuted(false);
 	}
 
-	public void register(ReportRegistration rr) {
+	public void register(ReportRegistration rr, User u) {
 		rr.setExecuted(true);
+		rr.setAdmin(u);
 		this.registrationReportRepo.save(rr);
 		
 		User user = new User();

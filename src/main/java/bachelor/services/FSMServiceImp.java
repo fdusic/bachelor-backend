@@ -129,20 +129,9 @@ public class FSMServiceImp implements FSMService {
 			return list.get(0);
 	}
 
-	public void createFailureReport(ReportFailure rf) {
-		User user = new User();
-		user.setIdU(1);
-		
-		User user2 = new User();
-		user2.setIdU(2);
-		
-		rf.setExecuted(false);
-		rf.setDateCreated(new Date());
+	public void createFailureReport(ReportFailure rf, User user) {
 		rf.setEmployee(user);
-		rf.setRepairer(user2);
-		
-		System.out.println(rf);
-		
+		rf.setDateCreated(new Date());
 		this.failureReportRepo.save(rf);
 	}
 
@@ -150,8 +139,9 @@ public class FSMServiceImp implements FSMService {
 		return this.failureReportRepo.findByExecuted(false);
 	}
 
-	public void fixed(ReportFailure rf) {
+	public void fixed(ReportFailure rf, User user) {
 		rf.setExecuted(true);
+		rf.setRepairer(user);
 		this.failureReportRepo.save(rf);
 	}
 

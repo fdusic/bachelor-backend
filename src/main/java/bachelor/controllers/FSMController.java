@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ import bachelor.beans.MachineInTopology;
 import bachelor.beans.ReportFailure;
 import bachelor.beans.Section;
 import bachelor.beans.Topology;
+import bachelor.beans.User;
 import bachelor.services.FSMService;
 
 // POM - postrojenje, odeljenje, masine
@@ -144,8 +147,13 @@ public class FSMController {
 	}
 	
 	@RequestMapping(value = "/createFailureReport", method = RequestMethod.POST)
-	public void createFailureReport(@RequestBody ReportFailure rf){
-		this.fsmService.createFailureReport(rf);
+	public void createFailureReport(@RequestBody ReportFailure rf, @Context HttpServletRequest request){
+		User user = (User) request.getSession().getAttribute("user");
+		
+		if(user == null)
+			return;
+		
+		this.fsmService.createFailureReport(rf, user);
 	}
 	
 	@RequestMapping(value = "/getFailureReports", method = RequestMethod.GET)
@@ -154,9 +162,12 @@ public class FSMController {
 	}
 	
 	@RequestMapping(value = "/fixed", method = RequestMethod.POST)
-	public void fixed(@RequestBody ReportFailure rf){
-		System.out.println(rf);
-		this.fsmService.fixed(rf);
+	public void fixed(@RequestBody ReportFailure rf, @Context HttpServletRequest request){
+		User user = (User) request.getSession().getAttribute("user");
+		if(user == null)
+			return;
+		
+		this.fsmService.fixed(rf,user);
 	}
 	
 	@RequestMapping(value = "/createConnectionType", method = RequestMethod.POST)
