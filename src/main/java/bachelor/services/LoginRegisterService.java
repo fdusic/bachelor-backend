@@ -8,8 +8,8 @@ import bachelor.beans.User;
 public interface LoginRegisterService {
 
 	public User login(User user);
-	public void createRegistrationReport(ReportRegistration rr);
+	public void createRegistrationReport(ReportRegistration rr, User user);
 	public List<ReportRegistration> getReportRegistrations();
-	public void register(ReportRegistration rr);
+	public void register(ReportRegistration rr, User user);
 	
 }

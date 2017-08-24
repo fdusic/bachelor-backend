@@ -47,9 +47,12 @@ public class LoginRegisterController {
 	}
 	
 	@RequestMapping(value = "/createRegistrationReport", method = RequestMethod.POST)
-	public void createRegistrationRequest(@RequestBody ReportRegistration report){
-		System.out.println(report);
-		this.loginRegisterService.createRegistrationReport(report);
+	public void createRegistrationRequest(@RequestBody ReportRegistration report, @Context HttpServletRequest request){
+		User user = (User) request.getSession().getAttribute("user");
+		if(user == null)
+			return;
+		
+		this.loginRegisterService.createRegistrationReport(report, user);
 	}
 	
 	@RequestMapping(value = "/getRegistrationReports", method = RequestMethod.GET)
@@ -58,7 +61,11 @@ public class LoginRegisterController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public void register(@RequestBody ReportRegistration rr){
-		this.loginRegisterService.register(rr);
+	public void register(@RequestBody ReportRegistration rr, @Context HttpServletRequest request){
+		User user = (User) request.getSession().getAttribute("user");
+		if(user == null)
+			return;
+		
+		this.loginRegisterService.register(rr, user);
 	}
 }
