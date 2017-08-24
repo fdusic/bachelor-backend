@@ -2,6 +2,9 @@ package bachelor.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +25,25 @@ public class LoginRegisterController {
 	private LoginRegisterService loginRegisterService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@RequestBody User user){
-		return this.loginRegisterService.login(user);
+	public String login(@RequestBody User user, @Context HttpServletRequest request){
+		User u = this.loginRegisterService.login(user);
+		
+		if(u != null) {
+			request.getSession().setAttribute("user", u);
+			return "success";
+		}
+		
+		return "no user";
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public void logout(@Context HttpServletRequest request){
+		request.getSession().invalidate();
+	}
+	
+	@RequestMapping(value = "/getLogedUser", method = RequestMethod.GET)
+	public User getLogedUser(@Context HttpServletRequest request){
+		return (User) request.getSession().getAttribute("user");
 	}
 	
 	@RequestMapping(value = "/createRegistrationReport", method = RequestMethod.POST)

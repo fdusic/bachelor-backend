@@ -19,17 +19,17 @@ public class LoginRegisterServiceImp implements LoginRegisterService{
 	@Autowired
 	private RegistrationReportRepo registrationReportRepo;
 	
-	public String login(User user) {
+	public User login(User user) {
 		
 		List<User> list = this.userRepo.findByUsername(user.getUsername());
 		
 		if(list.size() == 0)
-			return "no user";
+			return null;
 		
 		if(!(list.get(0).getPassword().equals(user.getPassword())))
-			return "wrong password";
+			return null;
 		
-		return "success";
+		return list.get(0);
 	}
 
 	public void createRegistrationReport(ReportRegistration rr) {
