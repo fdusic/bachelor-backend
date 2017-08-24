@@ -29,6 +29,8 @@ public class ReportFailure implements Serializable{
 	@JoinColumn(name = "idE", nullable = false)
 	private User employee;
 	
+	
+	//PROVERITI OVO
 	@ManyToOne
 	@JoinColumn(name = "idR", nullable = false)
 	private User repairer;
