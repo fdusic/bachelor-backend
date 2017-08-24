@@ -81,8 +81,5 @@ public class Process implements Serializable{
 	public void setAuthor(User author) {
 		this.author = author;
 	}
-	
-	
-	
 
 }
