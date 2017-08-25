@@ -1,6 +1,5 @@
 package bachelor.services;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import bachelor.beans.ConnectionType;
 import bachelor.beans.Facility;
 import bachelor.beans.Interface;
 import bachelor.beans.Machine;
-import bachelor.beans.MachineInTopology;
 import bachelor.beans.ReportFailure;
 import bachelor.beans.Section;
 import bachelor.beans.Topology;
@@ -19,7 +17,6 @@ import bachelor.repositories.ConnectionTypeRepo;
 import bachelor.repositories.FacilityRepo;
 import bachelor.repositories.FailureReportRepo;
 import bachelor.repositories.InterfaceRepo;
-import bachelor.repositories.MachineInTopologyRepo;
 import bachelor.repositories.MachineRepo;
 import bachelor.repositories.SectionRepo;
 import bachelor.repositories.TopologyRepo;
@@ -51,9 +48,6 @@ public class FSMServiceImp implements FSMService {
 	
 	@Autowired
 	private UserRepo userRepo;
-	
-	@Autowired
-	private MachineInTopologyRepo machineInTopologyRepo;
 	
 	public void createFacility(Facility f) {
 		this.facilityRepo.save(f);
@@ -162,17 +156,5 @@ public class FSMServiceImp implements FSMService {
 		User user = users.get(0);
 		t.setAuthor(user);
 		return this.topologyRepo.save(t);
-	}
-
-	public List<MachineInTopology> createMachinesInTopology(List<MachineInTopology> mts) {
-		
-		List<MachineInTopology> temp = new ArrayList<MachineInTopology>();
-		
-		for(MachineInTopology mt: mts){
-			MachineInTopology m = this.machineInTopologyRepo.save(mt); 
-			temp.add(m);
-		}
-		
-		return temp;
 	}
 }

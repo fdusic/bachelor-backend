@@ -1,50 +1,31 @@
 package bachelor.beans;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-@Entity
 @SuppressWarnings("serial")
-public class MachineInTopology implements Serializable{
-	
-	
+@Entity
+public class MachineInTopology implements Serializable {
+
 	@Id
 	@GeneratedValue
 	private int idMT;
 	
-	@Column(nullable = false)
-	private Float x;
-	
-	
-	@Column(nullable = false)
-	private Float y;
-	
-	@Column(length = 100, nullable = false)
-	private String description;
-	
+	@JoinColumn(name = "topology", nullable = false)
 	@ManyToOne
-	@JoinColumn(name="machine",nullable=false)
-	private Machine machine;
-	
-	@ManyToOne
-	@JoinColumn(name="topology", nullable=false)
 	private Topology topology;
 	
-	@ManyToMany
-	@JoinTable(name="connectedMachines",joinColumns =
-            @JoinColumn(name = "mt1", referencedColumnName = "idMT"),
-        inverseJoinColumns =
-            @JoinColumn(name = "mt2", referencedColumnName = "idMT"))
-	private List<MachineInTopology> connectedMachines;
+	@JoinColumn(name = "machine", nullable = false)
+	@ManyToOne
+	private Machine machine;
+	
+	public MachineInTopology() {
+	}
 
 	public int getIdMT() {
 		return idMT;
@@ -54,28 +35,12 @@ public class MachineInTopology implements Serializable{
 		this.idMT = idMT;
 	}
 
-	public Float getX() {
-		return x;
+	public Topology getTopology() {
+		return topology;
 	}
 
-	public void setX(Float x) {
-		this.x = x;
-	}
-
-	public Float getY() {
-		return y;
-	}
-
-	public void setY(Float y) {
-		this.y = y;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setTopology(Topology topology) {
+		this.topology = topology;
 	}
 
 	public Machine getMachine() {
@@ -85,15 +50,4 @@ public class MachineInTopology implements Serializable{
 	public void setMachine(Machine machine) {
 		this.machine = machine;
 	}
-
-	public Topology getTopology() {
-		return topology;
-	}
-
-	public void setTopology(Topology topology) {
-		this.topology = topology;
-	}
-	
-	
-
 }

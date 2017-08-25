@@ -1,6 +1,7 @@
 package bachelor.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @SuppressWarnings("serial")
@@ -33,6 +35,10 @@ public class Process implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="author",nullable=false)
 	private User author;
+	
+	@OneToMany
+	@JoinColumn(name="process", nullable = false)
+	private List<Step> steps;
 
 	public int getIdP() {
 		return idP;
@@ -80,6 +86,14 @@ public class Process implements Serializable{
 
 	public void setAuthor(User author) {
 		this.author = author;
+	}
+
+	public List<Step> getSteps() {
+		return steps;
+	}
+
+	public void setSteps(List<Step> steps) {
+		this.steps = steps;
 	}
 
 }

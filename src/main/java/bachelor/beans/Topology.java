@@ -30,11 +30,9 @@ public class Topology implements Serializable{
 	@JoinColumn(name="section", nullable = false)
 	private Section section;
 	
-	
 	@ManyToOne
 	@JoinColumn(name="author", nullable=false)
 	private User author;
-
 
 	public int getIdT() {
 		return idT;

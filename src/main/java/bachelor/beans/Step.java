@@ -1,14 +1,12 @@
 package bachelor.beans;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
@@ -20,19 +18,19 @@ public class Step implements Serializable{
 	@GeneratedValue
 	private int idStep;
 	
+	@Column(length = 30, nullable = false)
+	private String name;
+	
 	@Column(length = 100, nullable = false)
 	private String description;
 	
 	@Column(length = 30, nullable = false)
-	private String duration;
+	private String color;
 	
 	@ManyToOne
-	@JoinColumn(name="machineInTopology",nullable=false)
-	private MachineInTopology machineInTopology;
+	@JoinColumn(name="machine", nullable=false)
+	private Machine machine;
 	
-	@ManyToMany
-	private List<Process> processes;
-
 	public int getIdStep() {
 		return idStep;
 	}
@@ -49,31 +47,27 @@ public class Step implements Serializable{
 		this.description = description;
 	}
 
-	public String getDuration() {
-		return duration;
+	public String getName() {
+		return name;
 	}
 
-	public void setDuration(String duration) {
-		this.duration = duration;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public MachineInTopology getMachineInTopology() {
-		return machineInTopology;
+	public String getColor() {
+		return color;
 	}
 
-	public void setMachineInTopology(MachineInTopology machineInTopology) {
-		this.machineInTopology = machineInTopology;
+	public void setColor(String color) {
+		this.color = color;
 	}
 
-	public List<Process> getProcesses() {
-		return processes;
+	public Machine getMachine() {
+		return machine;
 	}
 
-	public void setProcesses(List<Process> processes) {
-		this.processes = processes;
+	public void setMachine(Machine machine) {
+		this.machine = machine;
 	}
-	
-	
-	
-	
 }
