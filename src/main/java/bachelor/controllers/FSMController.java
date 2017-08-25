@@ -22,7 +22,6 @@ import bachelor.beans.ConnectionType;
 import bachelor.beans.Facility;
 import bachelor.beans.Interface;
 import bachelor.beans.Machine;
-import bachelor.beans.MachineInTopology;
 import bachelor.beans.ReportFailure;
 import bachelor.beans.Section;
 import bachelor.beans.Topology;
@@ -185,8 +184,4 @@ public class FSMController {
 		return this.fsmService.createTopology(t);
 	}
 	
-	@RequestMapping(value = "/createMachinesInTopology", method = RequestMethod.POST)
-	public List<MachineInTopology> createMachinesInTopology(@RequestBody List<MachineInTopology> mts){
-		return this.fsmService.createMachinesInTopology(mts);
-	}
 }
