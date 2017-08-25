@@ -40,6 +40,14 @@ public class Machine implements Serializable {
             @JoinColumn(name = "interface", referencedColumnName = "idI"))
 	private List<Interface> supportsInterface;
 	
+	
+	@ManyToMany
+	@JoinTable(name="supportsProtocol",joinColumns =
+            @JoinColumn(name = "machine", referencedColumnName = "idM"),
+        inverseJoinColumns =
+            @JoinColumn(name = "protocol", referencedColumnName = "idCT"))
+	private List<ConnectionType> supportsProtocol;
+	
 	public Machine() {
 	}
 
@@ -90,5 +98,14 @@ public class Machine implements Serializable {
 	public void setSupportsInterface(List<Interface> supportsInterface) {
 		this.supportsInterface = supportsInterface;
 	}
+
+	public List<ConnectionType> getSupportsProtocol() {
+		return supportsProtocol;
+	}
+
+	public void setSupportsProtocol(List<ConnectionType> supportsProtocol) {
+		this.supportsProtocol = supportsProtocol;
+	}
+	
 	
 }

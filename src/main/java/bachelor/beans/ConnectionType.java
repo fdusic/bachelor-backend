@@ -24,10 +24,6 @@ public class ConnectionType implements Serializable{
 	@Column(length = 100,nullable=true)
 	private String description;
 	
-	
-	@ManyToOne
-	@JoinColumn(name="interface",nullable=false)
-	private Interface iface;
 
 	public int getIdCT() {
 		return idCT;
@@ -51,14 +47,6 @@ public class ConnectionType implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Interface getIface() {
-		return iface;
-	}
-
-	public void setIface(Interface iface) {
-		this.iface = iface;
 	}
 	
 	
