@@ -1,12 +1,15 @@
 package bachelor.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -33,6 +36,11 @@ public class Topology implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="author", nullable=false)
 	private User author;
+	
+	@ManyToMany
+	@JoinTable(name = "machineInTopology", joinColumns = @JoinColumn(name = "topology", referencedColumnName = "idT"), 
+												inverseJoinColumns = @JoinColumn(name = "machine", referencedColumnName = "idM"))
+	private List<Machine> machines;
 
 	public int getIdT() {
 		return idT;
@@ -92,8 +100,15 @@ public class Topology implements Serializable{
 	public void setAuthor(User author) {
 		this.author = author;
 	}
-	
-	
-	
+
+
+	public List<Machine> getMachines() {
+		return machines;
+	}
+
+
+	public void setMachines(List<Machine> machines) {
+		this.machines = machines;
+	}
 
 }

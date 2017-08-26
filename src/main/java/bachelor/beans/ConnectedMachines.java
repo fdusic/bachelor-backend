@@ -32,6 +32,10 @@ public class ConnectedMachines implements Serializable{
 	@ManyToOne
 	private Interface iface;
 	
+	@JoinColumn(name = "topology")
+	@ManyToOne
+	private Topology topology;
+	
 	public ConnectedMachines() {
 	}
 
@@ -74,4 +78,14 @@ public class ConnectedMachines implements Serializable{
 	public void setIface(Interface iface) {
 		this.iface = iface;
 	}
+
+	public Topology getTopology() {
+		return topology;
+	}
+
+	public void setTopology(Topology topology) {
+		this.topology = topology;
+	}
+	
+	
 }

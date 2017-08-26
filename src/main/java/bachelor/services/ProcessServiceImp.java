@@ -40,4 +40,8 @@ public class ProcessServiceImp implements ProcessService {
 		return ret;
 	}
 
+	public Topology getTopologyById(int topologyId) {
+		return this.topologyRepo.findOne(topologyId);
+	}
+
 }

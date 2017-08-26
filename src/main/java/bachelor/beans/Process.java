@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 @SuppressWarnings("serial")
@@ -36,7 +36,7 @@ public class Process implements Serializable{
 	@JoinColumn(name="author",nullable=false)
 	private User author;
 	
-	@OneToMany
+	@ManyToMany
 	@JoinColumn(name="process", nullable = false)
 	private List<Step> steps;
 

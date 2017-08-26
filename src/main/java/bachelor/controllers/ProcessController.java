@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import bachelor.beans.Process;
+import bachelor.beans.Topology;
 import bachelor.services.ProcessService;
 
 @RestController
@@ -25,4 +26,8 @@ public class ProcessController {
 		return this.processService.getProcessesForSection(Integer.parseInt(sectionId));
 	}
 	
+	@RequestMapping(value = "/getTopologyById", method = RequestMethod.POST)
+	public Topology getTopologyById(@RequestBody String topologyId) {
+		return this.processService.getTopologyById(Integer.parseInt(topologyId));
+	}
 }
