@@ -19,27 +19,28 @@ public class Machine implements Serializable {
 	@Id
 	@GeneratedValue
 	private int idM;
-	
+
 	@Column(length = 100)
 	private String image;
-	
+
 	@Column(length = 50, nullable = false)
 	private String name;
-	
+
 	@Column(length = 100, nullable = false)
 	private String description;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "section", nullable = false)
 	private Section section;
-	
+
 	@ManyToMany
-	@JoinTable(name="supportsInterface",joinColumns =
-            @JoinColumn(name = "machine", referencedColumnName = "idM"),
-        inverseJoinColumns =
-            @JoinColumn(name = "interface", referencedColumnName = "idI"))
+	@JoinTable(name = "supportsInterface", joinColumns = @JoinColumn(name = "machine", referencedColumnName = "idM"), inverseJoinColumns = @JoinColumn(name = "interface", referencedColumnName = "idI"))
 	private List<Interface> supportsInterface;
-	
+
+	@ManyToMany
+	@JoinTable(name = "supportsProtocol", joinColumns = @JoinColumn(name = "machine", referencedColumnName = "idM"), inverseJoinColumns = @JoinColumn(name = "protocol", referencedColumnName = "idCT"))
+	private List<ConnectionType> supportsProtocol;
+
 	public Machine() {
 	}
 
@@ -90,5 +91,13 @@ public class Machine implements Serializable {
 	public void setSupportsInterface(List<Interface> supportsInterface) {
 		this.supportsInterface = supportsInterface;
 	}
-	
+
+	public List<ConnectionType> getSupportsProtocol() {
+		return supportsProtocol;
+	}
+
+	public void setSupportsProtocol(List<ConnectionType> supportsProtocol) {
+		this.supportsProtocol = supportsProtocol;
+	}
+
 }
