@@ -21,6 +21,9 @@ public class Link implements Serializable {
 	@ManyToOne
 	private Step to;
 	
+	@ManyToOne
+	private Process process;
+	
 	public Link() {
 	}
 
@@ -47,5 +50,12 @@ public class Link implements Serializable {
 	public void setTo(Step to) {
 		this.to = to;
 	}
-	
+
+	public Process getProcess() {
+		return process;
+	}
+
+	public void setProcess(Process process) {
+		this.process = process;
+	}
 }
