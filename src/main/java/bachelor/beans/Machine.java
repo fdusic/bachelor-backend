@@ -36,10 +36,15 @@ public class Machine implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "supportsInterface", joinColumns = @JoinColumn(name = "machine", referencedColumnName = "idM"), inverseJoinColumns = @JoinColumn(name = "interface", referencedColumnName = "idI"))
 	private List<Interface> supportsInterface;
-
+	
+	
 	@ManyToMany
-	@JoinTable(name = "supportsProtocol", joinColumns = @JoinColumn(name = "machine", referencedColumnName = "idM"), inverseJoinColumns = @JoinColumn(name = "protocol", referencedColumnName = "idCT"))
+	@JoinTable(name="supportsProtocol",joinColumns =
+            @JoinColumn(name = "machine", referencedColumnName = "idM"),
+        inverseJoinColumns =
+            @JoinColumn(name = "protocol", referencedColumnName = "idCT"))
 	private List<ConnectionType> supportsProtocol;
+	
 
 	public Machine() {
 	}
