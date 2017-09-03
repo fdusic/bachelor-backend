@@ -27,7 +27,7 @@ public class Topology implements Serializable{
 	private String description;
 	
 	@Column(nullable = false)
-	private Float version;
+	private boolean active;
 	
 	@ManyToOne
 	@JoinColumn(name="section", nullable = false)
@@ -72,13 +72,13 @@ public class Topology implements Serializable{
 	}
 
 
-	public Float getVersion() {
-		return version;
+	public boolean isActive() {
+		return active;
 	}
 
 
-	public void setVersion(Float version) {
-		this.version = version;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 

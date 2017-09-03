@@ -21,4 +21,8 @@ public class TopologyServiceImp implements TopologyService {
 		return this.topologyRepo.findBySection(s);
 	}
 
+	public Topology saveTopology(Topology topology) {
+		return this.topologyRepo.save(topology);
+	}
+
 }

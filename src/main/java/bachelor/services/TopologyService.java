@@ -8,4 +8,7 @@ public interface TopologyService {
 
 	List<Topology> getTopologiesForSection(int sectionId);
 	
+	public Topology saveTopology(Topology topology);
+	
+	
 }
