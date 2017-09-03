@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bachelor.beans.ConnectedMachines;
 import bachelor.beans.Link;
 import bachelor.beans.Machine;
 import bachelor.beans.Process;
@@ -13,6 +14,7 @@ import bachelor.beans.ProcessSaveHelp;
 import bachelor.beans.Section;
 import bachelor.beans.Step;
 import bachelor.beans.Topology;
+import bachelor.repositories.ConnectedMachinesRepo;
 import bachelor.repositories.LinkRepo;
 import bachelor.repositories.ProcessRepo;
 import bachelor.repositories.StepRepo;
@@ -32,6 +34,9 @@ public class ProcessServiceImp implements ProcessService {
 	
 	@Autowired
 	private LinkRepo linkRepo;
+	
+	@Autowired
+	private ConnectedMachinesRepo connectedMachinesRepo;
 	
 	public List<Process> getProcessesForSection(int sectionId) {
 
@@ -93,6 +98,13 @@ public class ProcessServiceImp implements ProcessService {
 
 	public List<Link> getLinksForProcess(Process p) {
 		return this.linkRepo.findByProcess(p);
+	}
+
+	public List<ConnectedMachines> getMachineConnections(String topologyId) {
+		Topology t = new Topology();
+		t.setIdT(Integer.parseInt(topologyId));
+		
+		return this.connectedMachinesRepo.findByTopology(t);
 	}
 
 }

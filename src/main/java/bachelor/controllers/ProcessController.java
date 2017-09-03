@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import bachelor.beans.ConnectedMachines;
 import bachelor.beans.Link;
 import bachelor.beans.Machine;
 import bachelor.beans.Process;
@@ -60,5 +62,10 @@ public class ProcessController {
 	@RequestMapping(value = "/getLinksForProcess", method = RequestMethod.POST)
 	public List<Link> getLinksForProcess(@RequestBody Process process) {
 		return this.processService.getLinksForProcess(process);
+	}
+	
+	@RequestMapping(value = "/getMachineConnections", method = RequestMethod.GET)
+	public List<ConnectedMachines> getMachineConnections(@RequestParam(name="topology") String topologyId) {
+		return this.processService.getMachineConnections(topologyId);
 	}
 }

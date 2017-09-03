@@ -3,6 +3,7 @@ package bachelor.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import bachelor.beans.ConnectedMachines;
 import bachelor.beans.Link;
 import bachelor.beans.Machine;
 import bachelor.beans.Process;
@@ -19,5 +20,6 @@ public interface ProcessService {
 	public ProcessSaveHelp saveProcessAndSteps(Process process);
 	public void saveLinks(ArrayList<Link> links);
 	public List<Link> getLinksForProcess(Process p);
+	public List<ConnectedMachines> getMachineConnections(String topologyId);
 	
 }
