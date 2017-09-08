@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bachelor.beans.ConnectedMachines;
 import bachelor.beans.Section;
 import bachelor.beans.Topology;
+import bachelor.repositories.ConnectedMachinesRepo;
 import bachelor.repositories.TopologyRepo;
 
 @Service
@@ -14,6 +16,10 @@ public class TopologyServiceImp implements TopologyService {
 	
 	@Autowired
 	private TopologyRepo topologyRepo;
+	
+	@Autowired
+	private ConnectedMachinesRepo connectedMachinesRepo;
+	
 	
 	public List<Topology> getTopologiesForSection(int sectionId) {
 		Section s = new Section();
@@ -24,5 +30,6 @@ public class TopologyServiceImp implements TopologyService {
 	public Topology saveTopology(Topology topology) {
 		return this.topologyRepo.save(topology);
 	}
+
 
 }

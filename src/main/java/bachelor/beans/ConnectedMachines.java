@@ -2,6 +2,7 @@ package bachelor.beans;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ public class ConnectedMachines implements Serializable{
 	private int idCM;
 	
 	@JoinColumn(name = "machine1")
-	@ManyToOne 
+	@ManyToOne
 	private Machine machine1;
 	
 	@JoinColumn(name = "machine2")
@@ -32,7 +33,7 @@ public class ConnectedMachines implements Serializable{
 	@ManyToOne
 	private Interface iface;
 	
-	@JoinColumn(name = "topology")
+	@JoinColumn(name = "topology", nullable = true)
 	@ManyToOne
 	private Topology topology;
 	

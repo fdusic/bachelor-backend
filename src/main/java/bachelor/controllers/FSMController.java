@@ -108,8 +108,8 @@ public class FSMController {
 		
 		
 		String saveImageName = machine.getIdM() + file.getOriginalFilename();
-		String imagePath = new java.io.File(".").getCanonicalPath() + File.separator + ".." + File.separator + ".." + File.separator + "frontend/bachelor-frontend/src/images/" + saveImageName;
-		
+		String imagePath = new java.io.File(".").getCanonicalPath()  + File.separator + ".." + File.separator + "bachelor-frontend/src/images/" + saveImageName;
+		System.out.println(imagePath);
 		file.transferTo(new File(imagePath));
 		return machine;
 	}
